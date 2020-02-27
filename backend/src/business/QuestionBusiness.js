@@ -19,10 +19,17 @@ class QuestionBusiness {
     }
 
     async nextQuestion(category_ids, question_ids) {
-        var result = await this._repository.nextQuestion(category_ids, question_ids);
-        if (result != null)
-            result = result[0];
-        return result;
+        var result = null;
+        if (category_ids == null)
+            result = await this._repository.nextQuestionForAllCategories(question_ids);
+        else
+            result = await this._repository.nextQuestion(category_ids, question_ids);
+
+        if (result != null && result.length > 0){
+            return await this.findById(result[0]._id);
+        }
+        
+        return null;
     }
 }
 

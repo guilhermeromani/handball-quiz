@@ -7,7 +7,7 @@ const QuizSchema = new moongose.Schema({
     result: {
         quantityOfQuestions: { type: Number, default: 0 },
         sumOfAlternatives: { type: Number, default: 0 },
-        correctAnswers: { type: Number, default: 0 }
+        currentScore: { type: Number, default: 0 }
     },
     answers_log: {
         type: [{

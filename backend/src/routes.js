@@ -22,6 +22,7 @@ routes.get('/questions/:id', QuestionController.findById);
 routes.post('/quiz', QuizController.create);
 routes.get('/quiz', QuizController.list);
 routes.get('/quiz/:id', QuizController.findById);
+routes.put('/quiz/:quiz_id/send', QuizController.sendAnswer);
 routes.get('/quiz/:quiz_id/next', QuizController.nextQuestion);
 
 module.exports = routes;

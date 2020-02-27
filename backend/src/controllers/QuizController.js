@@ -23,10 +23,10 @@ module.exports = {
         return res.json(result);
     },    
 
-    async update(req, res) {
+    async sendAnswer(req, res) {
         var business = new QuizBusiness();
-
-        const result = await business.update(req.params.id, req.body);
+        
+        const result = await business.sendAnswer(req.params.quiz_id, req.body);
         return res.json(result);
     },
 

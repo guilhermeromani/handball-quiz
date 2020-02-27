@@ -11,8 +11,8 @@ class QuestionRepository {
         return this.model.find();
     }
 
-    findById(id) {
-        return this.model.aggregate([
+    async findById(id) {
+        var element = await this.model.aggregate([
             { $match: { _id: new ObjectId(id) } },
             {
                 $lookup: {
@@ -23,7 +23,10 @@ class QuestionRepository {
                 }
             },
             {
-                $unwind: "$category"
+                $unwind: {
+                    path: "$category",
+                    preserveNullAndEmptyArrays: true
+                }
             },
             {
                 $lookup: {
@@ -37,6 +40,10 @@ class QuestionRepository {
                 $unwind: "$rules"
             }
         ]);
+
+        if (element != null && element.length > 0)
+            return element[0];
+        return element;
     }
 
     create(data) {
@@ -44,21 +51,17 @@ class QuestionRepository {
     }
 
     nextQuestion(category_ids, question_ids) {
-        if (category_ids == null)
-            return this.model.aggregate([
-                { $match: { _id: { $nin: question_ids } } },
-                { $sample: { size: 1 } },
-            ]);
-        else
-            return this.model.aggregate([
-                { $match: { category_id: { $in: category_ids }, _id: { $nin: question_ids } } },
-                { $sample: { size: 1 } }
-            ]);
+        return this.model.aggregate([
+            { $match: { category_id: { $in: category_ids }, _id: { $nin: question_ids } } },
+            { $sample: { size: 1 } }
+        ]);
+    }
 
-        // if(category_ids == null)
-        //     return this.model.findOne({ _id: { $nin: question_ids } });
-        // else
-        //     return this.model.findOne({ category_id: { $in: category_ids }, _id: { $nin: question_ids } });
+    nextQuestionForAllCategories(question_ids) {
+        return this.model.aggregate([
+            { $match: { _id: { $nin: question_ids } } },
+            { $sample: { size: 1 } },
+        ]);
     }
 }
 
