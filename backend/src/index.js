@@ -1,12 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const cors = require('cors');
+const cors = require('cors');
 const requireDir = require('require-dir');
 require('dotenv/config');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
-// app.use(cors());
 
 mongoose.connect(process.env.DATABASE_CONNECTION + "/" + process.env.DATABASE_NAME, {
     useNewUrlParser: true,
@@ -16,4 +16,4 @@ requireDir("./models");
 
 app.use('/v1', require('./routes'));
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 3020);
