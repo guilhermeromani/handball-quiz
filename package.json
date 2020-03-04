@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "deploy_backend": "cd backend && npm start"
+  }
+}
