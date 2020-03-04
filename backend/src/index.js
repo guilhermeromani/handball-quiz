@@ -16,4 +16,4 @@ requireDir("./models");
 
 app.use('/v1', require('./routes'));
 
-app.listen(process.env.PORT || 3020);
+app.listen(process.env.PORT || 3002);
