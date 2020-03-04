@@ -2,10 +2,14 @@ const moongose = require('mongoose');
 
 const CategorySchema = new moongose.Schema({
     number: {
-        type: Number,
+        type: String,
         required: true
     },
     description: {
+        type: String,
+        required: true
+    },
+    type: {
         type: String,
         required: true
     }
