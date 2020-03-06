@@ -7,8 +7,12 @@ class HomeScreen extends Component {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text>Menu</Text>
           <Button
-            title="Abra as categorias"
-            onPress={() => this.props.navigation.navigate('Categories')}
+            title="Novo"
+            onPress={() => this.props.navigation.navigate('NewQuiz')}
+          />
+          <Button
+            title="Meus Testes"
+            onPress={() => this.props.navigation.navigate('MyQuizzes')}
           />
         </View>
       );

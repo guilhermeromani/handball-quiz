@@ -2,7 +2,10 @@ import { createAppContainer } from 'react-navigation'
 import { createStackNavigator, TransitionPresets } from 'react-navigation-stack'
 
 import Home from './pages/Home'
-import Categories from './pages/Categories'
+import NewQuiz from './pages/NewQuiz'
+import MyQuizzes from './pages/MyQuizzes'
+// import Question from './pages/Question'
+import Explanation from './pages/Explanation'
 
 const Routes = createAppContainer(
     createStackNavigator({
@@ -12,8 +15,26 @@ const Routes = createAppContainer(
                 title: 'Menu'
             }
         },
-        Categories: {
-            screen: Categories,
+        NewQuiz: {
+            screen: NewQuiz,
+            navigationOptions: {
+                title: 'Novo Teste'
+            }
+        },
+        MyQuizzes: {
+            screen: MyQuizzes,
+            navigationOptions: {
+                title: 'Meus Testes'
+            }
+        },
+        // Question: {
+        //     screen: Question,
+        //     navigationOptions: {
+        //         title: 'Meus Testes'
+        //     }
+        // },
+        Explanation: {
+            screen: Explanation,
             mode: 'modal',
             navigationOptions: {
                 title: 'Categorias',
@@ -21,7 +42,8 @@ const Routes = createAppContainer(
                 cardOverlayEnabled: true,
                 gestureEnabled: true,
             }
-        }
+        },
+
     }, {
         defaultNavigationOptions: {
             headerTintColor: '#FFF',
