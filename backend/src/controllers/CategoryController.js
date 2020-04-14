@@ -1,25 +1,26 @@
-const CategoryBusiness = require('../business/CategoryBusiness');
+const CategoryBusiness = require("../business/CategoryBusiness");
 
-module.exports =  {
+module.exports = {
+  async list(req, res) {
+    var business = new CategoryBusiness();
 
-    async list(req, res) {
-        var business = new CategoryBusiness();
+    const result = await business.list();
+    return res.json(
+      result.sort((a, b) => parseInt(a.number) - parseInt(b.number))
+    );
+  },
 
-        const result = await business.list();
-        return res.json(result);
-    },
+  async findById(req, res) {
+    var business = new CategoryBusiness();
 
-    async findById(req, res) {
-        var business = new CategoryBusiness();
+    const result = await business.findById(req.params.id);
+    return res.json(result);
+  },
 
-        const result = await business.findById(req.params.id);
-        return res.json(result);
-    },
+  async create(req, res) {
+    var business = new CategoryBusiness();
 
-    async create(req, res) {
-        var business = new CategoryBusiness();
-
-        const result = await business.create(req.body);
-        return res.json(result);
-    }
-}
+    const result = await business.create(req.body);
+    return res.json(result);
+  },
+};

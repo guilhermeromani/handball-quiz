@@ -12,7 +12,8 @@ module.exports = {
     async list(req, res) {
         var business = new QuizBusiness();
 
-        const result = await business.list();
+        const { page = 1} = req.query;
+        const result = await business.list(page);
         return res.json(result);
     },
 

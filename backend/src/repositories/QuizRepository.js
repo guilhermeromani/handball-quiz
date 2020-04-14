@@ -1,30 +1,29 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 class QuizRepository {
+  constructor() {
+    this.model = mongoose.model("Quiz");
+  }
 
-    constructor() {
-        this.model = mongoose.model("Quiz");
-    }
+  list(page) {
+    return this.model.paginate({}, { page, limit: 10 });
+  }
 
-    list() {
-        return this.model.find();
-    }
+  findById(id) {
+    return this.model.findById(id);
+  }
 
-    findById(id) {
-        return this.model.findById(id);
-    }
+  create(data) {
+    return this.model.create(data);
+  }
 
-    create(data) {
-        return this.model.create(data);
-    }
+  update(id, data) {
+    return this.model.findByIdAndUpdate(id, data, { new: true });
+  }
 
-    update(id, data) {
-        return this.model.findByIdAndUpdate(id, data, { new: true });
-    }
-
-    delete(id) {
-        this.model.findByIdAndRemove(id);
-    }
+  delete(id) {
+    this.model.findByIdAndRemove(id);
+  }
 }
 
 module.exports = QuizRepository;
