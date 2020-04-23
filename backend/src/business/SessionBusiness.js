@@ -13,7 +13,7 @@ class SessionBusiness {
       return null; // User not found.
     }
 
-    if (!(await userBusiness.checkPassword(password, user.password))) {
+    if (!(await user.compareHash(password))) {
       return null; // Password does not match.
     }
 
