@@ -6,7 +6,18 @@ const CategoryController = require('./controllers/CategoryController');
 const RuleController = require('./controllers/RuleController');
 const QuestionController = require('./controllers/QuestionController');
 const QuizController = require('./controllers/QuizController');
+const UserController = require('./controllers/UserController');
+const SessionController = require('./controllers/SessionController');
 
+const AuthMiddleware = require('./middlewares/auth');
+
+// No Auth
+routes.post('/users', UserController.create);
+routes.post('/sessions', SessionController.create);
+
+routes.use(AuthMiddleware);
+
+// Auth
 routes.post('/categories', CategoryController.create);
 routes.get('/categories', CategoryController.list);
 routes.get('/categories/:id', CategoryController.findById);

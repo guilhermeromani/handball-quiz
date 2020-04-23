@@ -43,7 +43,6 @@ class QuizBusiness {
     );
 
     if (newQuestion != null) {
-      quiz.result.quantityOfQuestions++;
       quiz.result.sumOfAlternatives += newQuestion.correct_answers.length;
 
       var newQuestionId = newQuestion._id.toString();
@@ -63,6 +62,7 @@ class QuizBusiness {
     var question = await questionBusiness.findById(data.question_id);
 
     quiz.result.currentScore += this.calculateScore(question, data.answers);
+    quiz.result.answeredQuantityQuestions++;
     quiz.answers_log.push({
       question_id: question._id.toString(),
       answers: data.answers,
