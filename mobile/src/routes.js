@@ -1,58 +1,109 @@
-import { createAppContainer } from 'react-navigation'
-import { createStackNavigator, TransitionPresets } from 'react-navigation-stack'
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import CustomHeader from "./components/CustomHeader";
+import { Button, Alert } from "react-native";
 
-import Home from './pages/Home'
-import NewQuiz from './pages/NewQuiz'
-import MyQuizzes from './pages/MyQuizzes'
-// import Question from './pages/Question'
-import Explanation from './pages/Explanation'
+import OngoingQuiz from "./pages/OngoingQuiz";
+import Categories from "./pages/Categories";
+import Question from "./pages/Question";
+import Answer from "./pages/Answer";
+import Explanation from "./pages/Explanation";
 
-const Routes = createAppContainer(
-    createStackNavigator({
-        Home: {
-            screen: Home,
-            navigationOptions: {
-                title: 'Menu'
-            }
-        },
-        NewQuiz: {
-            screen: NewQuiz,
-            navigationOptions: {
-                title: 'Novo Teste'
-            }
-        },
-        MyQuizzes: {
-            screen: MyQuizzes,
-            navigationOptions: {
-                title: 'Meus Testes'
-            }
-        },
-        // Question: {
-        //     screen: Question,
-        //     navigationOptions: {
-        //         title: 'Meus Testes'
-        //     }
-        // },
-        Explanation: {
-            screen: Explanation,
-            mode: 'modal',
-            navigationOptions: {
-                title: 'Categorias',
-                ...TransitionPresets.ModalPresentationIOS,
-                cardOverlayEnabled: true,
-                gestureEnabled: true,
-            }
-        },
+const Stack = createStackNavigator();
+const Tab = createMaterialTopTabNavigator();
 
-    }, {
-        defaultNavigationOptions: {
-            headerTintColor: '#FFF',
-            headerBackTitleVisible: false,
-            headerStyle: {
-                backgroundColor: '#7D40E7'
-            }
-        }
-    })
-)
+function QuizzesTabs() {
+  return (
+    <Tab.Navigator
+      tabBarOptions={{
+        labelStyle: { fontSize: 12 },
+        style: { backgroundColor: "powderblue" },
+        activeTintColor: "tomato",
+        inactiveTintColor: "gray",
+      }}
+    >
+      <Tab.Screen name="Em Andamento" component={OngoingQuiz} />
+      <Tab.Screen name="Finalizados" component={Categories} />
+    </Tab.Navigator>
+  );
+}
 
-export default Routes;
+export default function Routes() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          options={{
+            header: ({ scene, previous, navigation }) => (
+              <CustomHeader
+                scene={scene}
+                previous={previous}
+                navigation={navigation}
+              />
+            ),
+          }}
+          component={QuizzesTabs}
+        />
+        <Stack.Screen
+          name="Categories"
+          options={{ headerTitle: "Categorias" }}
+          component={Categories}
+        />
+        <Stack.Screen
+          name="Question"
+          component={Question}
+          options={({ navigation, route }) => ({
+            headerLeft: null,
+            title: route.params.name,
+            headerRight: () => (
+              <Button
+                onPress={() =>
+                  Alert.alert(
+                    "Voltar para o início?",
+                    "Seu progresso até aqui não será perdido.",
+                    [
+                      {
+                        text: "Não, vamos continuar",
+                      },
+                      {
+                        text: "Sim, quero voltar",
+                        onPress: () => {
+                          navigation.navigate("Home");
+                        },
+                      },
+                    ],
+                    { cancelable: true }
+                  )
+                }
+                title="Info"
+                color="#fff"
+              />
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="Answer"
+          options={{ headerShown: false }}
+          component={Answer}
+        />
+        <Stack.Screen
+          name="Explanation"
+          component={Explanation}
+          model="modal"
+          options={{
+            title: "Explicação",
+            gestureEnabled: true,
+            cardOverlayEnabled: true,
+            ...TransitionPresets.ModalPresentationIOS,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
