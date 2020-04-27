@@ -5,7 +5,13 @@ import CheckBox from "../../components/Checkbox";
 
 import api from "../../services/api";
 
-import styles from "./styles";
+import {
+  Container,
+  Category,
+  CategoryList,
+  StartButton,
+  StartButtonText,
+} from "./styles";
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -50,25 +56,24 @@ export default function Categories() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <FlatList
+    <Container>
+      <CategoryList
         data={categories}
-        style={styles.categoryList}
         keyExtractor={(category) => String(category._id)}
         showsVerticalScrollIndicator={false}
         renderItem={({ item: category }) => (
-          <View style={styles.category}>
+          <Category>
             <CheckBox
               text={`${category.number}. ${category.description}`}
               selected={isSelected(category)}
               onPress={() => handleCheck(category)}
             />
-          </View>
+          </Category>
         )}
       />
-      <TouchableOpacity style={styles.startButton} onPress={handleStart}>
-        <Text style={styles.startButtonText}>Iniciar</Text>
-      </TouchableOpacity>
-    </View>
+      <StartButton onPress={handleStart}>
+        <StartButtonText>Iniciar</StartButtonText>
+      </StartButton>
+    </Container>
   );
 }

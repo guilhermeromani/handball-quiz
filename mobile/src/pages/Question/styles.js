@@ -1,57 +1,51 @@
-import { StyleSheet } from 'react-native';
+import styled from "styled-components/native";
 
-export default StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingHorizontal: 24
-    },
+export const Container = styled.View`
+  flex: 1;
+  padding-left: 24px;
+  padding-right: 24px;
+`;
 
-    question: {
-        padding: 24,
-        borderRadius: 8,
-        backgroundColor: '#FFF',
-        marginBottom: 16,
-        marginTop: 24
-    },
+export const QuestionView = styled.View`
+  padding: 24px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 16px;
+  margin-top: 24px;
+`;
 
-    questionNumber: {
-        fontSize: 18
-    },
+export const QuestionText = styled.Text`
+  font-size: 15px;
+`;
 
-    questionText: {
-        fontSize: 15
-    },
+export const AlternativeList = styled.FlatList`
+  margin-top: 32px;
+`;
 
-    alternativeList: {
-        marginTop: 32
-    },
+export const Alternative = styled.View`
+  padding: 24px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 16px;
+`;
 
-    alternative: {
-        padding: 24,
-        borderRadius: 8,
-        backgroundColor: '#FFF',
-        marginBottom: 16
-    },
+export const AnswerBox = styled.View`
+  margin-top: 16px;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
-    answerBox: {
-        marginTop: 16,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
+export const Answer = styled.TouchableOpacity`
+  background-color: #e02041;
+  border-radius: 8px;
+  height: 50px;
+  width: 48%;
+  justify-content: center;
+  align-items: center;
+`;
 
-    answer: {
-        backgroundColor: '#E02041',
-        borderRadius: 8,
-        height: 50,
-        width: '48%',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-
-    answerText: {
-        color: '#FFF',
-        fontSize: 15,
-        fontWeight: 'bold'
-    }
-
-});
+export const AnswerText = styled.Text`
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+`;

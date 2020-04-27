@@ -5,7 +5,7 @@ import { Feather } from "@expo/vector-icons";
 import QuizCard from "../../components/QuizCard";
 
 import api from "../../services/api";
-import styles from "./styles";
+import { Container, NewQuizButton, NewQuizButtonText } from "./styles";
 
 export default function OngoingQuiz() {
   const [quizzes, setQuizzes] = useState([]);
@@ -53,14 +53,11 @@ export default function OngoingQuiz() {
   }
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.newQuizButton}
-        onPress={() => navigation.navigate("Categories")}
-      >
+    <Container>
+      <NewQuizButton onPress={() => navigation.navigate("Categories")}>
         <Feather size={25} color="#FFF" name="plus-circle" />
-        <Text style={styles.newQuizButtonText}>Novo</Text>
-      </TouchableOpacity>
+        <NewQuizButtonText>Novo</NewQuizButtonText>
+      </NewQuizButton>
 
       <FlatList
         data={quizzes}
@@ -71,6 +68,6 @@ export default function OngoingQuiz() {
         onEndReachedThreshold={0.2}
         renderItem={({ item }) => renderQuiz(item)}
       />
-    </View>
+    </Container>
   );
 }

@@ -9,7 +9,16 @@ import CheckBox from "../../components/Checkbox";
 
 import api from "../../services/api";
 
-import styles from "./styles";
+import {
+  Container,
+  QuestionView,
+  QuestionText,
+  AlternativeList,
+  Alternative,
+  AnswerBox,
+  Answer,
+  AnswerText,
+} from "./styles";
 
 export default function Question() {
   const route = useRoute();
@@ -81,30 +90,29 @@ export default function Question() {
   }, [isFocused]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.question}>
-        <Text style={styles.questionText}>{question.text}</Text>
-      </View>
-      <FlatList
+    <Container>
+      <QuestionView>
+        <QuestionText>{question.text}</QuestionText>
+      </QuestionView>
+      <AlternativeList
         data={question.alternatives}
-        style={styles.alternativeList}
         keyExtractor={(alternative) => String(alternative._id)}
         showsVerticalScrollIndicator={false}
         renderItem={({ item: alternative }) => (
-          <View style={styles.alternative}>
+          <Alternative>
             <CheckBox
               text={`${alternative.letter}. ${alternative.text}`}
               selected={isSelected(alternative)}
               onPress={() => handleCheck(alternative)}
             />
-          </View>
+          </Alternative>
         )}
       />
-      <View style={styles.answerBox}>
-        <TouchableOpacity style={styles.answer} onPress={handleAnswer}>
-          <Text style={styles.answerText}>Enviar</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+      <AnswerBox>
+        <Answer onPress={handleAnswer}>
+          <AnswerText>Enviar</AnswerText>
+        </Answer>
+      </AnswerBox>
+    </Container>
   );
 }

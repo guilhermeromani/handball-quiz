@@ -1,39 +1,38 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
 
-export default StyleSheet.create({
-  container: {
-    flex: 1
-  },
+export const Container = styled.View`
+  flex: 1;
+`;
 
-  description: {
-    fontSize: 16,
-    lineHeight: 24,
-    color: '#737380'
-  },
+export const Description = styled.Text`
+  font-size: 16px;
+  line-height: 24px;
+  color: #747380;
+`;
 
-  categoryList: {
-    marginTop: 15,
-    paddingHorizontal: 24
-  },
+export const CategoryList = styled.FlatList`
+  margin-top: 15px;
+  padding-left: 24px;
+  padding-right: 24px;
+`;
 
-  category: {
-    padding: 24,
-    borderRadius: 8,
-    backgroundColor: '#FFF',
-    marginBottom: 16
-  },
+export const Category = styled.View`
+  padding: 24px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 16px;
+`;
 
-  startButton: {
-    backgroundColor: '#E02041',
-    height: 70,    
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
+export const StartButton = styled.TouchableOpacity`
+  background-color: #e02041;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+`;
 
-  startButtonText: {
-    color: '#FFF',
-    fontSize: 18,
-    fontWeight: 'bold'
-  }
-
-});
+export const StartButtonText = styled.Text`
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+`;
