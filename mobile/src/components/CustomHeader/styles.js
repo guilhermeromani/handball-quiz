@@ -1,12 +1,32 @@
 import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
 
+import styled from "styled-components/native";
+
+export const Container = styled.View`
+  flex: 1;
+  background-color: #ffdffd;
+`;
+
+export const Header = styled.View`
+  flex: 1;
+  
+  align-items: center;
+  justify-content: center;
+`;
+
+export const HeaderText = styled.Text`
+  font-size: 15px;
+  color: #737380;
+`;
+
+
 export default StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
     paddingTop: Constants.statusBarHeight + 20,
-    backgroundColor: "powderblue",
+    backgroundColor: "#F7C659",
     paddingBottom: 40,
   },
 
