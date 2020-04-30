@@ -4,16 +4,15 @@ import { FlatList } from "react-native";
 import QuizCard from "../../components/QuizCard";
 
 import api from "../../services/api";
-import { Container, NewQuizButton } from "./styles";
+import { Container } from "./styles";
 
-export default function OngoingQuiz() {
+export default function FinishedQuiz() {
   const [quizzes, setQuizzes] = useState([]);
   const [page, setPage] = useState(1);
   const [quizInfo, setQuizInfo] = useState({ pages: 1, total: 0 });
   const [loading, setLoading] = useState(false);
 
   let isFocused = useIsFocused();
-  const navigation = useNavigation();
 
   async function loadQuizzes() {
     if (loading) return;
@@ -22,7 +21,7 @@ export default function OngoingQuiz() {
     setLoading(true);
 
     const response = await api.get("quiz", {
-      params: { finished: false, page },
+      params: { finished: true, page },
     });
     const { docs, ...infos } = response.data;
 
@@ -52,20 +51,13 @@ export default function OngoingQuiz() {
         currentScore={currentScore}
         answeredQuestions={answeredQuantityQuestions}
         totalQuestions={maxQuestions}
-        finished={false}
+        finished={true}
       />
     );
   }
 
   return (
     <Container>
-      <NewQuizButton
-        icon="add-circle-outline"
-        onPress={() => navigation.navigate("Categories")}
-      >
-        Novo
-      </NewQuizButton>
-
       <FlatList
         data={quizzes}
         style={{ marginTop: 10 }}
@@ -78,10 +70,3 @@ export default function OngoingQuiz() {
     </Container>
   );
 }
-
-// OngoingQuiz.navigationOptions = {
-//   tabBarLabel: 'Agendamentos',
-//   tabBarIcon: ({ tintColor }) => (
-//     <Icon name="event" size />
-//   )
-// }

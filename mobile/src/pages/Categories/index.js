@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
-import { Button, Text, View, FlatList, TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
 import CheckBox from "../../components/Checkbox";
 
 import api from "../../services/api";
+
+import { setCurrentQuiz } from "../../store/modules/quiz/actions";
 
 import {
   Container,
@@ -16,6 +18,8 @@ import {
 export default function Categories() {
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   async function loadCategories() {
@@ -47,7 +51,8 @@ export default function Categories() {
     await api
       .post("quiz", { category_ids: selectedCategories })
       .then((response) => {
-        navigation.navigate("Question", { currentQuiz: response.data });
+        dispatch(setCurrentQuiz(response.data));
+        navigation.navigate("Question");
       });
   }
 

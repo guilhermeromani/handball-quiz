@@ -12,9 +12,9 @@ import { useSelector } from "react-redux";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import OngoingQuiz from "./pages/OngoingQuiz";
+import FinishedQuiz from "./pages/FinishedQuiz";
 import Categories from "./pages/Categories";
 import Question from "./pages/Question";
-import Answer from "./pages/Answer";
 import Explanation from "./pages/Explanation";
 
 const Stack = createStackNavigator();
@@ -32,7 +32,7 @@ function QuizzesTabs() {
       }}
     >
       <Tab.Screen name="Em Andamento" component={OngoingQuiz} />
-      <Tab.Screen name="Finalizados" component={Categories} />
+      <Tab.Screen name="Finalizados" component={FinishedQuiz} />
     </Tab.Navigator>
   );
 }
@@ -94,11 +94,6 @@ export default function Routes() {
                   />
                 ),
               })}
-            />
-            <Stack.Screen
-              name="Answer"
-              options={{ headerShown: false }}
-              component={Answer}
             />
             <Stack.Screen
               name="Explanation"

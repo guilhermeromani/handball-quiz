@@ -10,5 +10,7 @@ export const Container = styled.View`
 
 export const NewQuizButton = styled(Button)`
   background: #FEA13A;
+  margin-left: 10px;
+  margin-right: 10px;
   height: 70px;
 `;

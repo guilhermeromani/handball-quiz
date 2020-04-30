@@ -8,12 +8,14 @@ import { useDispatch } from "react-redux";
 import styles from "./styles";
 
 import { setCurrentQuiz } from "../../store/modules/quiz/actions";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default function QuizCard({
   currentQuiz,
   currentScore,
   answeredQuestions,
   totalQuestions,
+  finished,
   ...props
 }) {
   const navigation = useNavigation();
@@ -50,7 +52,7 @@ export default function QuizCard({
     return v;
   }
 
-  function goToQuestion() {
+  function handlePlay() {
     dispatch(setCurrentQuiz(currentQuiz));
     navigation.navigate("Question");
   }
@@ -61,7 +63,7 @@ export default function QuizCard({
 
   return (
     <ListItem
-      Component={TouchableOpacity}
+      Component={finished ? TouchableWithoutFeedback : TouchableOpacity}
       friction={90}
       tension={100}
       activeScale={0.95}
@@ -84,7 +86,7 @@ export default function QuizCard({
         // textStyle: { color: "orange" },
         // containerStyle: { marginTop: -20 },
       }}
-      onPress={goToQuestion}
+      onPress={() => (!finished ? handlePlay() : null)}
     />
   );
 }
