@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useRoute, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { Avatar, ListItem } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
 
 import styles from "./styles";
+
+import { setCurrentQuiz } from "../../store/modules/quiz/actions";
 
 export default function QuizCard({
   currentQuiz,
@@ -13,8 +16,9 @@ export default function QuizCard({
   totalQuestions,
   ...props
 }) {
-  const route = useRoute();
   const navigation = useNavigation();
+
+  const dispatch = useDispatch();
 
   const [colorStart, setColorStart] = useState([0, 0]);
   const [colorEnd, setColorEnd] = useState([0, 0]);
@@ -46,6 +50,11 @@ export default function QuizCard({
     return v;
   }
 
+  function goToQuestion() {
+    dispatch(setCurrentQuiz(currentQuiz));
+    navigation.navigate("Question");
+  }
+
   useEffect(() => {
     setColors();
   }, []);
@@ -75,11 +84,7 @@ export default function QuizCard({
         // textStyle: { color: "orange" },
         // containerStyle: { marginTop: -20 },
       }}
-      onPress={() =>
-        navigation.navigate("Question", {
-          currentQuiz: currentQuiz,
-        })
-      }
+      onPress={goToQuestion}
     />
   );
 }

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useNavigation, useNavigationState } from "@react-navigation/native";
-import { TouchableOpacity, Text, View, FlatList } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import {
+  useNavigation,
+  useNavigationState,
+  useIsFocused,
+} from "@react-navigation/native";
+import { FlatList } from "react-native";
 import QuizCard from "../../components/QuizCard";
 
 import api from "../../services/api";
-import { Container, NewQuizButton, NewQuizButtonText } from "./styles";
+import { Container, NewQuizButton } from "./styles";
 
 export default function OngoingQuiz() {
   const [quizzes, setQuizzes] = useState([]);
@@ -13,6 +16,7 @@ export default function OngoingQuiz() {
   const [quizInfo, setQuizInfo] = useState({ pages: 0, total: 0 });
   const [loading, setLoading] = useState(false);
 
+  let isFocused = useIsFocused();
   const navigation = useNavigation();
 
   async function loadQuizzes() {
@@ -32,8 +36,10 @@ export default function OngoingQuiz() {
   }
 
   useEffect(() => {
-    loadQuizzes();
-  }, []);
+    if (isFocused) {
+      loadQuizzes();
+    }
+  }, [isFocused]);
 
   function renderQuiz(quiz) {
     const {
@@ -54,9 +60,11 @@ export default function OngoingQuiz() {
 
   return (
     <Container>
-      <NewQuizButton onPress={() => navigation.navigate("Categories")}>
-        <Feather size={25} color="#FFF" name="plus-circle" />
-        <NewQuizButtonText>Novo</NewQuizButtonText>
+      <NewQuizButton
+        icon="add-circle-outline"
+        onPress={() => navigation.navigate("Categories")}
+      >
+        Novo
       </NewQuizButton>
 
       <FlatList
@@ -71,3 +79,10 @@ export default function OngoingQuiz() {
     </Container>
   );
 }
+
+// OngoingQuiz.navigationOptions = {
+//   tabBarLabel: 'Agendamentos',
+//   tabBarIcon: ({ tintColor }) => (
+//     <Icon name="event" size />
+//   )
+// }

@@ -68,7 +68,7 @@ export default function Routes() {
               component={Question}
               options={({ navigation, route }) => ({
                 headerLeft: null,
-                title: route.params.name,
+                title: "",
                 headerRight: () => (
                   <Button
                     onPress={() =>

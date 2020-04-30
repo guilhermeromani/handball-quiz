@@ -1,12 +1,21 @@
-import React from 'react';
-import { Button, Text, View } from 'react-native';
+import React from "react";
+
+import {
+  Container,
+  ScrollContainer,
+  RuleTitle,
+  RuleDescription,
+} from "./styles";
 
 export default function Explanation({ route, navigation }) {
-    const { rules } = route.params;
+  const { rules } = route.params;
 
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontSize: 30 }}>{rules.text}</Text>
-        </View>
-    );
+  return (
+    <Container>
+      <ScrollContainer>
+        <RuleTitle>Regra: {rules.number}</RuleTitle>
+        <RuleDescription>{rules.text}</RuleDescription>
+      </ScrollContainer>
+    </Container>
+  );
 }

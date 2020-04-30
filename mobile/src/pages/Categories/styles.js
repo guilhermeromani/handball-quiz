@@ -13,8 +13,8 @@ export const Description = styled.Text`
 
 export const CategoryList = styled.FlatList`
   margin-top: 15px;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 export const Category = styled.View`
