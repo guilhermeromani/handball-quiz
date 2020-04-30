@@ -5,8 +5,11 @@ class QuizRepository {
     this.model = mongoose.model("Quiz");
   }
 
-  list(page) {
-    return this.model.paginate({}, { page, limit: 10 });
+  list(finished, userId, page) {
+    return this.model.paginate(
+      { finished: finished, user_id: userId },
+      { page, limit: 10 }
+    );
   }
 
   findById(id) {

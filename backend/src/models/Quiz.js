@@ -4,7 +4,7 @@ const mongoosePaginate = require("mongoose-paginate");
 const QuizSchema = new moongose.Schema({
   category_ids: [moongose.Schema.Types.ObjectId], //null for all the categories
   question_ids: [moongose.Schema.Types.ObjectId],
-  // user_id : moongose.Schema.Types.ObjectId,
+  user_id : moongose.Schema.Types.ObjectId,
   result: {
     maxQuestions: { type: Number, default: 0 },
     answeredQuantityQuestions: { type: Number, default: 0 },

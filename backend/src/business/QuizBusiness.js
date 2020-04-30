@@ -1,32 +1,40 @@
 const QuizRepository = require("../repositories/QuizRepository");
 
 const QuestionBusiness = require("./QuestionBusiness");
+const UserBusiness = require("../business/UserBusiness");
 
 class QuizBusiness {
   constructor() {
     this._repository = new QuizRepository();
   }
 
-  async list(page) {
-    return await this._repository.list(page);
+  async list(finished, userId, page) {
+    return await this._repository.list(finished, userId, page);
   }
 
   async findById(id) {
     return await this._repository.findById(id);
   }
 
-  // async create(quiz, userId) {
-  async create(data) {
-    // var userBusiness = new UserBusiness();
-    // var owner = await userBusiness.findById(userId);
-    var { category_ids } = data;
-    var questionBusiness = new QuestionBusiness();
-    let maxQuestions = await questionBusiness.thereArehowManyQuestions(
-      category_ids
-    );
-    data.result = { maxQuestions: maxQuestions };
+  async create(req) {
+    var data = req.body;
+    var userId = req.userId;
 
-    return await this._repository.create(data);
+    var userBusiness = new UserBusiness();
+    var owner = await userBusiness.findById(userId);
+
+    if (owner) {
+      var { category_ids } = data;
+      var questionBusiness = new QuestionBusiness();
+      let maxQuestions = await questionBusiness.thereArehowManyQuestions(
+        category_ids
+      );
+      data.result = { maxQuestions: maxQuestions };
+      data.user_id = owner.id;
+
+      return await this._repository.create(data);
+    }
+    return null;
   }
 
   async update(id, data) {

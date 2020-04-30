@@ -21,6 +21,7 @@ class SessionBusiness {
       token: jwt.sign({ id: user.id }, process.env.PWD_SECRET, {
         expiresIn: "7d",
       }),
+      user: user,
     };
   }
 }
