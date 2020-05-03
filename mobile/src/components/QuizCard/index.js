@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import styles from "./styles";
 
 import { setCurrentQuiz } from "../../store/modules/quiz/actions";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export default function QuizCard({
   currentQuiz,
@@ -64,11 +63,13 @@ export default function QuizCard({
 
   return (
     <ListItem
-      Component={finished ? TouchableWithoutFeedback : TouchableOpacity}
+      Component={TouchableOpacity}
       friction={90}
       tension={100}
       activeScale={0.95}
       containerStyle={styles.card}
+      disabled={finished}
+      disabledStyle={{ opacity: 0.6 }}
       linearGradientProps={{
         colors: [color.pbg1, color.pbg2],
         start: colorStart,
@@ -86,7 +87,7 @@ export default function QuizCard({
         // textStyle: { color: "orange" },
         // containerStyle: { marginTop: -20 },
       }}
-      onPress={() => (!finished ? handlePlay() : null)}
+      onPress={handlePlay}
     />
   );
 }

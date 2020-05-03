@@ -4,7 +4,7 @@ import { FlatList } from "react-native";
 import QuizCard from "../../components/QuizCard";
 
 import api from "../../services/api";
-import { Container } from "./styles";
+import { Container, FinishedCard } from "./styles";
 
 export default function FinishedQuiz() {
   const [quizzes, setQuizzes] = useState([]);
@@ -35,6 +35,10 @@ export default function FinishedQuiz() {
   useEffect(() => {
     if (isFocused) {
       loadQuizzes();
+    } else {
+      setPage(1);
+      setQuizzes([]);
+      setQuizInfo({ pages: 1, total: 0 });
     }
   }, [isFocused]);
 
@@ -46,7 +50,7 @@ export default function FinishedQuiz() {
     } = quiz.result;
 
     return (
-      <QuizCard
+      <FinishedCard
         currentQuiz={quiz}
         currentScore={currentScore}
         answeredQuestions={answeredQuantityQuestions}

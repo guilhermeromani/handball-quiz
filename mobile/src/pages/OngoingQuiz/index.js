@@ -36,6 +36,10 @@ export default function OngoingQuiz() {
   useEffect(() => {
     if (isFocused) {
       loadQuizzes();
+    } else {
+      setPage(1);
+      setQuizzes([]);
+      setQuizInfo({ pages: 1, total: 0 });
     }
   }, [isFocused]);
 
@@ -78,10 +82,3 @@ export default function OngoingQuiz() {
     </Container>
   );
 }
-
-// OngoingQuiz.navigationOptions = {
-//   tabBarLabel: 'Agendamentos',
-//   tabBarIcon: ({ tintColor }) => (
-//     <Icon name="event" size />
-//   )
-// }
