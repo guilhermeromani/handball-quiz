@@ -44,8 +44,7 @@ export default function SignUp({ navigation }) {
             onChangeText={setName}
             autoCapitalize="none"
             autoCorrect={false}
-            underlineColorAndroid="transparent"
-            autoFocus
+            underlineColorAndroid="transparent"            
             returnKeyType="next"
             onSubmitEditing={() => emailRef.current.focus()}
           />

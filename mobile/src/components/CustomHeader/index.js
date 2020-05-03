@@ -1,18 +1,26 @@
 import React from "react";
-import { View } from "react-native";
-import { Text, Divider, Avatar } from "react-native-elements";
+import { Avatar } from "react-native-elements";
 
-import Background from "../Background";
+import { Container, Header, UserName } from "./styles";
 
-import styles from "./styles";
+export default function CustomHeader({ navigation }) {
+  function handleEdit() {
+    navigation.navigate("Profile");
+  }
 
-export default function CustomHeader() {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Olá Guilherme</Text>
-        <Avatar rounded size="medium" title="GR" />
-      </View>
-    </View>
+    <Container>
+      <Header>
+        <UserName>Olá Guilherme</UserName>
+        <Avatar
+          rounded
+          size="medium"
+          title="GR"
+          showAccessory
+          onPress={handleEdit}
+          activeOpacity={0.7}
+        />
+      </Header>
+    </Container>
   );
 }

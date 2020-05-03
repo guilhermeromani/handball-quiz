@@ -44,7 +44,6 @@ export default function SignIn({ navigation }) {
             autoCapitalize="none"
             autoCorrect={false}
             underlineColorAndroid="transparent"
-            autoFocus
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
           />

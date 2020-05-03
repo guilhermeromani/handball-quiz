@@ -1,9 +1,10 @@
 import styled from "styled-components/native";
+import { color, font } from "../../styles/global";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export const Container = styled.TouchableOpacity`
   height: 46px;
-  background: #3b9eff;
+  background: ${color.defaultButtonColor};
   border-radius: 8px;
   flex-direction: row;
   align-items: center;
@@ -11,8 +12,8 @@ export const Container = styled.TouchableOpacity`
 `;
 
 export const Text = styled.Text`
-  font-family: "montserrat-bold";
-  color: #fff;
+  font-family: ${font.bold};
+  color: ${color.defaultButtonTextColor};
   font-size: 16px;
 `;
 

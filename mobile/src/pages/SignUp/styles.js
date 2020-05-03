@@ -1,5 +1,6 @@
 import { Platform } from "react-native";
 import styled from "styled-components/native";
+import { color, font } from "../../styles/global";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 
@@ -31,7 +32,7 @@ export const SignLink = styled.TouchableOpacity`
 `;
 
 export const SignLinkText = styled.Text`
-  font-family: "montserrat-bold";
-  font-size: 16px;
-  color: #fff;
+  font-family: ${font.bold};
+  font-size: ${font.linkTextSize};
+  color: ${color.linkTextColor};
 `;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, ListItem } from "react-native-elements";
+import { color } from "../../styles/global";
 import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
@@ -69,8 +70,7 @@ export default function QuizCard({
       activeScale={0.95}
       containerStyle={styles.card}
       linearGradientProps={{
-        // colors: ["#FF9800", "#F44336"],
-        colors: ["#0396FF", "#ABDCFF"],
+        colors: [color.pbg1, color.pbg2],
         start: colorStart,
         end: colorEnd,
       }}

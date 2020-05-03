@@ -16,6 +16,7 @@ import FinishedQuiz from "./pages/FinishedQuiz";
 import Categories from "./pages/Categories";
 import Question from "./pages/Question";
 import Explanation from "./pages/Explanation";
+import Profile from "./pages/Profile";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -105,6 +106,11 @@ export default function Routes() {
                 cardOverlayEnabled: true,
                 ...TransitionPresets.ModalPresentationIOS,
               }}
+            />
+            <Stack.Screen
+              name="Profile"
+              options={{ headerTitle: "Perfil" }}
+              component={Profile}
             />
           </>
         ) : (

@@ -1,81 +1,26 @@
-import { StyleSheet } from "react-native";
-import Constants from "expo-constants";
-
 import styled from "styled-components/native";
+import { LinearGradient } from "expo-linear-gradient";
+import { color, font } from "../../styles/global";
 
-export const Container = styled.View`
+export const Container = styled(LinearGradient).attrs({
+  colors: [color.g1, color.g2],
+})`
   flex: 1;
-  background-color: #ffdffd;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 20px;
+  padding-bottom: 40px;
 `;
 
 export const Header = styled.View`
-  flex: 1;
-  
+  padding: 10px;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
 `;
 
-export const HeaderText = styled.Text`
-  font-size: 15px;
-  color: #737380;
+export const UserName = styled.Text`
+  font-family: ${font.regular};
+  font-size: ${font.defaultTextSize};
+  color: ${color.defaultTextColor};
 `;
-
-
-export default StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 16,
-    paddingTop: Constants.statusBarHeight + 20,
-    backgroundColor: "#F7C659",
-    paddingBottom: 40,
-  },
-
-  header: {
-    padding: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-
-  headerText: {
-    fontSize: 15,
-    color: "#737380",
-  },
-
-  headerTextBold: {
-    fontWeight: "bold",
-  },
-
-  number: {
-    fontSize: 18,
-    color: "#fff",
-    textTransform: "capitalize",
-  },
-
-  result: {
-    fontSize: 18,
-    color: "#fff",
-    textTransform: "capitalize",
-  },
-
-  containerTop: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-
-  containerBot: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-
-  divider: {
-    backgroundColor: "#dfe6e9",
-    marginVertical: 20,
-  },
-
-  category: {
-    fontSize: 18,
-    color: "#fff",
-  },
-});
